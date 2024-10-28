@@ -1,0 +1,72 @@
+class Solution {
+    public int uniquePaths(int m, int n) {
+    // Space Optimized-  Space->O(n) time->O(m*n)
+
+        int dp[]=new int[n];
+        for(int i=0;i<n;i++){
+            dp[i]=1;
+        }
+        for(int j=0;j<m-1;j++){
+            for(int i=1;i<n;i++){
+                dp[i]=dp[i]+dp[i-1];
+            }
+        }
+        return dp[n-1];
+        // HashMap Solution --> Time O(m*n) space O(m*n)+O(Auxilary stack space);
+      /*   HashMap<Pair,Integer> map=new HashMap<>();
+        return f(0,0,m-1,n-1,map);
+    }
+    public static int f(int i,int j,int totR,int totC,HashMap<Pair,Integer> map){
+
+Pair key=new Pair(i,j);
+if(map.containsKey(key))
+return map.get(key);
+        if((i>totR)||(j>totC))
+        return 0;
+
+        if((i==totR)&&(j==totC))
+        return 1;
+
+
+        int down=f(i+1,j,totR,totC,map);
+        int left=f(i,j+1,totR,totC,map);
+        map.put(key,down+left);
+        return down+left;
+// Memoization time->O(m*n) space->O(m*n) +Stack extra sapace
+  int dp[][]=new int[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                dp[i][j]=-1;
+            }
+        }
+        int resR=m-1,resC=n-1;
+        return f(0,0,resR,resC,dp);
+    }
+    public static int f(int i,int j,int resR,int resC,int dp[][]){
+         if((i==resR)&&(j==resC))
+        return 1;
+        if((i>resR)||(j>resC))
+        return 0;
+        if(dp[i][j]!=-1)
+        return dp[i][j];
+       
+
+        int down=f(i+1,j,resR,resC,dp);
+        int right=f(i,j+1,resR,resC,dp);
+        dp[i][j]= down+right;
+        return dp[i][j];
+        // tabulation time-> O(m*n) , Space-> O(m*n) no extra space
+        int dp[][]=new int[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if((i==0)||(j==0))
+                dp[i][j]=1;
+                else
+                dp[i][j]=dp[i-1][j]+dp[i][j-1];
+            }
+        }
+return dp[m-1][n-1];
+*/
+
+    }
+}
