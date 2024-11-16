@@ -1,0 +1,24 @@
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+            
+        if (head != null) {
+            var firstEvenNode = head.next;
+            processReorderingReturnLastOdd(head).next = firstEvenNode;
+        }
+        
+        return head;
+    }
+    
+    private ListNode processReorderingReturnLastOdd(ListNode odd) {
+           
+        var even = odd.next;
+        if (even == null || even.next == null) {
+            return odd;
+        }
+
+        odd = odd.next = even.next;
+        even.next = even.next.next;
+
+        return processReorderingReturnLastOdd(odd);       
+    }
+}
